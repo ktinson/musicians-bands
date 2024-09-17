@@ -1,8 +1,8 @@
-const {sequelize} = require('../db')
+const {db} = require('../db')
 const {Sequelize} = require('sequelize')
 
 // TODO - define the Musician model
-let Musician = sequelize.define("Band", {
+let Musician = db.define("Musician", {
     name: Sequelize.STRING,
     instrument: Sequelize.STRING,
 })
