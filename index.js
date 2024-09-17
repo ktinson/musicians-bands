@@ -7,9 +7,9 @@ Band.hasMany(Musician)
 Musician.belongsTo(Band)
 
 Band.hasMany(Song)
-Song.belongsTo(Band)
-// User.belongsToMany(Like, {through: "User-Like"})
-// Song.belongsToMany(User, {through: "User-Like"})
+
+Band.belongsToMany(Song, {through: "Band-Song"})
+Song.belongsToMany(Band, {through: "Song-Band"})
 
 
 module.exports = {

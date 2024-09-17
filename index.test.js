@@ -18,6 +18,12 @@ describe('Band, Musician, and Song Models', () => {
         const newBand = await Band.findByPk(1)
         expect(newBand.id).toBe(1);
     })
+    test('can find all Bands', async function() {
+        // TODO - test creating a band
+        const allTheBands = await Band.findAll()
+        const newBands = await Band.findByPk(1)
+        expect(allTheBands).toEqual([newBands]);
+    })
     test('can create a Band Bulk', async function() {
         // TODO - test creating a band
         await Band.bulkCreate([{name: "TestBand", genre: "TestGenre" },
@@ -28,6 +34,35 @@ describe('Band, Musician, and Song Models', () => {
              {name: "TestBand5", genre: "TestGenre5" }])
         const newBand = await Band.findByPk(5)
         expect(newBand.id).toBe(5);
+    })
+    test('can create a Song', async function() {
+        // TODO - test creating a band
+        await Song.create({name: "TestSong", year: 1800, length: 5})
+        const newSong = await Song.findByPk(1)
+        expect(newSong.id).toBe(1);
+    })
+    test('can create a Band Bulk', async function() {
+        // TODO - test creating a band
+        await Song.bulkCreate([{name: "TestSong", year: 1800, length: 5},
+             {name: "TestSong1", year: 1801, length: 6}, 
+             {name: "TestSong2", year: 1802, length: 7},
+             {name: "TestSong3", year: 1803, length: 8},
+             {name: "TestSong4", year: 1804, length: 9},
+             {name: "TestSong5", year: 1805, length: 4}])
+        const newSong = await Song.findByPk(5)
+        expect(newSong.id).toBe(5);
+    })
+    test('can add songs to a Band', async function() {
+        // TODO - test ADDING SONGS
+        
+        const someBand = await Band.findByPk(1)
+        const someSong = await Song.findByPk(1)
+        // const someSongA = await Song.findByPk(2)
+        await someBand.addSongs(someSong)
+        // await someBand.addSong(someSongA)
+         // TODO - FIX THIS
+        expect(someBand).toContain(someBand);
+        // expect(someBand.Song[1]).toBe(2);
     })
 
     test('can create a Musician', async () => {
