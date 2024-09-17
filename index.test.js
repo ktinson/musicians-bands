@@ -18,12 +18,34 @@ describe('Band, Musician, and Song Models', () => {
         const newBand = await Band.findByPk(1)
         expect(newBand.id).toBe(1);
     })
+    test('can create a Band Bulk', async function() {
+        // TODO - test creating a band
+        await Band.bulkCreate([{name: "TestBand", genre: "TestGenre" },
+             {name: "TestBand1", genre: "TestGenre1" }, 
+             {name: "TestBand2", genre: "TestGenre2" },
+             {name: "TestBand3", genre: "TestGenre3" },
+             {name: "TestBand4", genre: "TestGenre4" },
+             {name: "TestBand5", genre: "TestGenre5" }])
+        const newBand = await Band.findByPk(5)
+        expect(newBand.id).toBe(5);
+    })
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
-        await Musician.create({name: "TestMusician", genre: "TestPerson" })
+        await Musician.create({name: "TestMusician", instrument: "TestPerson" })
         const newMusician = await Musician.findByPk(1)
         expect(newMusician.id).toBe(1);
+    })
+    test('can create a Musician Bulk', async function() {
+        // TODO - test creating a band
+        await Musician.bulkCreate([{name: "TestMusician", instrument: "TestGenre" },
+             {name: "TestMusician1", instrument: "TestPerson1" }, 
+             {name: "TestMusician2", instrument: "TestPerson2" },
+             {name: "TestMusician3", instrument: "TestPerson3" },
+             {name: "TestMusician4", instrument: "TestPerson4" },
+             {name: "TestMusician5", instrument: "TestPerson5" }])
+        const newMusician = await Musician.findByPk(5)
+        expect(newMusician.id).toBe(5);
     })
 
     test('can update a Band', async () => {
