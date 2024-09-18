@@ -24,6 +24,13 @@ describe('Band, Musician, and Song Models', () => {
         const newBands = await Band.findByPk(1)
         expect(allTheBands).toEqual([newBands]);
     })
+    // test('can find all Band Musicians', async function() {
+    //     // TODO - test creating a band
+    //     const allTheBands = await Band.findAll()
+    //     const newBands = await Band.findByPk(1)
+    //     expect(allTheBands).toEqual([newBands]);
+    //     expect(allTheBands).toContain([newBands]);
+    // })
     test('can create a Band Bulk', async function() {
         // TODO - test creating a band
         await Band.bulkCreate([{name: "TestBand", genre: "TestGenre" },
@@ -52,19 +59,17 @@ describe('Band, Musician, and Song Models', () => {
         const newSong = await Song.findByPk(5)
         expect(newSong.id).toBe(5);
     })
-    // test('can add songs to a Band', async function() {
-    //     // TODO - test ADDING SONGS
+    test('can add songs to a Band', async function() {
+        // TODO - test ADDING SONGS
         
-    //     const someBand = await Band.findByPk(1)
-    //     const someSong = await Song.findByPk(1)
-    //     // const someSongA = await Song.findByPk(2)
-    //     await someBand.addSong(someSong)
-    //     // await someBand.addSong(someSongA)
-    //      // TODO - FIX THIS
-    //     //  Band-Song.addSongs(someSong)
-    //     expect(someBand).toContain(someSong);
-    //     // expect(someBand.Song[1]).toBe(2);
-    // })
+        let someBand = await Band.findByPk(1)
+        let someSong = await Song.findByPk(1)
+        let someSongA = await Song.findByPk(2)
+        await someBand.addSongs(someSong)
+        await someBand.addSongs(someSongA)
+        Band.findAll({ include: Song }); 
+        Song.findAll({ include: Band}); 
+    })
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
