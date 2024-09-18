@@ -76,10 +76,10 @@ describe('Band, Musician, and Song Models', () => {
         let someBand = await Band.findByPk(1)
         let someMusician = await Musician.findByPk(1)
         let someMusicianA = await Musician.findByPk(2)
-        await someBand.addMusicians(someMusician)
-        await someBand.addMusicians(someMusicianA)
-        Band.findAll({ include: Musician }); 
-        Musician.findAll({ include: Band}); 
+        await someBand.addMusician(someMusician)
+        await someBand.addMusician(someMusicianA)
+        Band.findAll({ include: 'musician' }); 
+        Musician.findAll({ include: 'band'}); 
     })
 
     test('can create a Musician', async () => {

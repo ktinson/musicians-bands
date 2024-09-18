@@ -4,11 +4,13 @@ const { Song } = require("./models/Song")
 // Define associations here
 
 Band.hasMany(Musician, {
-    foreignKey: 'BandId',
+    as: 'musician',
   })
-Musician.belongsTo(Band)
+Musician.belongsTo(Band,  {
+    foreignKey: "BandId",
+    as: "band"
+})
 
-Band.hasMany(Song)
 
 Band.belongsToMany(Song, {through: "Band-Song"})
 Song.belongsToMany(Band, {through: "Band-Song"})
