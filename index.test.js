@@ -70,6 +70,17 @@ describe('Band, Musician, and Song Models', () => {
         Band.findAll({ include: Song }); 
         Song.findAll({ include: Band}); 
     })
+    test('can add Musicians to a Band', async function() {
+        // TODO - test ADDING SONGS
+        
+        let someBand = await Band.findByPk(1)
+        let someMusician = await Musician.findByPk(1)
+        let someMusicianA = await Musician.findByPk(2)
+        await someBand.addMusicians(someMusician)
+        await someBand.addMusicians(someMusicianA)
+        Band.findAll({ include: Musician }); 
+        Musician.findAll({ include: Band}); 
+    })
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
