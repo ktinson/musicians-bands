@@ -23,14 +23,8 @@ describe('Band, Musician, and Song Models', () => {
         const allTheBands = await Band.findAll()
         const newBands = await Band.findByPk(1)
         expect(allTheBands).toEqual([newBands]);
+        // expect(allTheBands).toEqual([allTheBands]);
     })
-    // test('can find all Band Musicians', async function() {
-    //     // TODO - test creating a band
-    //     const allTheBands = await Band.findAll()
-    //     const newBands = await Band.findByPk(1)
-    //     expect(allTheBands).toEqual([newBands]);
-    //     expect(allTheBands).toContain([newBands]);
-    // })
     test('can create a Band Bulk', async function() {
         // TODO - test creating a band
         await Band.bulkCreate([{name: "TestBand", genre: "TestGenre" },
@@ -68,7 +62,7 @@ describe('Band, Musician, and Song Models', () => {
         await someBand.addSongs(someSong)
         await someBand.addSongs(someSongA)
         Band.findAll({ include: Song }); 
-        Song.findAll({ include: Band}); 
+        Song.findAll({ include: Band}); //like this works
     })
     test('can add Musicians to a Band', async function() {
         // TODO - test ADDING SONGS
@@ -79,7 +73,7 @@ describe('Band, Musician, and Song Models', () => {
         await someBand.addMusician(someMusician)
         await someBand.addMusician(someMusicianA)
         Band.findAll({ include: 'musician' }); 
-        Musician.findAll({ include: 'band'}); 
+        Musician.findAll({ include: 'band'}); //
     })
 
     test('can create a Musician', async () => {
