@@ -64,17 +64,7 @@ describe('Band, Musician, and Song Models', () => {
         Band.findAll({ include: Song }); 
         Song.findAll({ include: Band}); //like this works
     })
-    test('can add Musicians to a Band', async function() {
-        // TODO - test ADDING SONGS
-        
-        let someBand = await Band.findByPk(1)
-        let someMusician = await Musician.findByPk(1)
-        let someMusicianA = await Musician.findByPk(2)
-        await someBand.addMusician(someMusician)
-        await someBand.addMusician(someMusicianA)
-        Band.findAll({ include: 'musician' }); 
-        Musician.findAll({ include: 'band'}); //
-    })
+    
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
@@ -93,7 +83,24 @@ describe('Band, Musician, and Song Models', () => {
         const newMusician = await Musician.findByPk(5)
         expect(newMusician.id).toBe(5);
     })
+    test('can add Musicians to a Band', async function() {
+        // TODO - test ADDING SONGS
+        let someBands = await Band.findAll()
+        let someMusicians = await Musician.findAll()
+        await someBands[2].addMusician(someMusicians[3])
+        await someBands[2].addMusicians([2, 3, 4, 5])
+        console.log(JSON.stringify(someBands, null, 2))
 
+        // let someMusician = await Musician.findByPk(1)
+        // await someBand.getMusicians()
+        // let someBand = await Band.findByPk(1)
+        // let someMusicianA = await Musician.findByPk(2)
+        // await someBand.addMusician(someMusician)
+        // await someBand.addMusician(someMusicianA)
+
+        // Band.findAll({ include: Musician }); 
+        // Musician.findAll({ include: Band}); //
+    })
     test('can update a Band', async () => {
         // TODO - test updating a band
         await Band.update({name: "TestBandUpdate" }, {where: {id: 1}})
