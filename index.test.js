@@ -87,19 +87,20 @@ describe('Band, Musician, and Song Models', () => {
         // TODO - test ADDING SONGS
         let someBands = await Band.findAll()
         let someMusicians = await Musician.findAll()
+        let someBand = await Band.findByPk(1)
+        let someMusicianA = await Musician.findByPk(2)
+        let someMusician = await Musician.findByPk(1)
+        await someBand.addMusician(someMusician)
+        await someBand.addMusician(someMusicianA)
         await someBands[2].addMusician(someMusicians[3])
-        await someBands[2].addMusicians([2, 3, 4, 5])
+        await someBands[2].addMusicians([ 3, 4, 5])
         console.log(JSON.stringify(someBands, null, 2))
+        await someBand.getMusicians()
+        await someBand.addMusician(someMusician)
+        await someBand.addMusician(someMusicianA)
 
-        // let someMusician = await Musician.findByPk(1)
-        // await someBand.getMusicians()
-        // let someBand = await Band.findByPk(1)
-        // let someMusicianA = await Musician.findByPk(2)
-        // await someBand.addMusician(someMusician)
-        // await someBand.addMusician(someMusicianA)
-
-        // Band.findAll({ include: Musician }); 
-        // Musician.findAll({ include: Band}); //
+        Band.findAll({ include: Musician }); 
+        Musician.findAll({ include: Band}); //
     })
     test('can update a Band', async () => {
         // TODO - test updating a band
